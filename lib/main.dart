@@ -19,7 +19,7 @@ class _MyAppState extends State<_MyApp> {
 
   final _flashOnController = TextEditingController(text: "Flash on");
   final _flashOffController = TextEditingController(text: "Flash off");
-  final _cancelController = TextEditingController(text: "Cancel");
+  //final _cancelController = TextEditingController(text: "Cancel");
 
   var _aspectTolerance = 0.00;
   var _numberOfCameras = 0;
@@ -45,9 +45,12 @@ class _MyAppState extends State<_MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    //  var w = MediaQuery.of(context).size.width;
+    //var h = MediaQuery.of(context).size.height;
     var contentList2 = <Widget>[
       (scanResult != null)
           ? Card(
+              color: Colors.transparent,
               child: Column(
                 children: <Widget>[
                   ((int.parse(scanResult.rawContent.substring(0, 3)) > 299 &&
@@ -269,15 +272,15 @@ class _MyAppState extends State<_MyApp> {
           controller: _flashOffController,
         ),
       ),
-      ListTile(
-        title: TextField(
-          decoration: InputDecoration(
-            // hasFloatingPlaceholder: true,
-            labelText: "Cancel",
-          ),
-          controller: _cancelController,
-        ),
-      ),
+      // ListTile(
+      //   title: TextField(
+      //     decoration: InputDecoration(
+      //       hasFloatingPlaceholder: true,
+      //       labelText: "Cancel",
+      //     ),
+      //     controller: _cancelController,
+      //   ),
+      // ),
     ]);
 
     if (Platform.isAndroid) {
@@ -375,14 +378,14 @@ class _MyAppState extends State<_MyApp> {
       color: Colors.indigo.shade100,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        drawerScrimColor: Colors.black26,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.indigo.shade50,
         drawer: Drawer(
           child: ListView(
             children: contentList,
           ),
         ),
         appBar: AppBar(
+          backgroundColor: Colors.indigo,
           title: Text('Barcode Scanner Example'),
           actions: <Widget>[
             IconButton(
@@ -394,8 +397,19 @@ class _MyAppState extends State<_MyApp> {
             )
           ],
         ),
-        body: ListView(
-          children: contentList2,
+
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                Color(0xFF0050FF),
+                Color(0xFFF5001),
+              ])),
+          child: ListView(
+            children: contentList2,
+          ),
         ),
         // body: InkWell(
         //   onTap: () {
@@ -446,7 +460,6 @@ class _MyAppState extends State<_MyApp> {
     try {
       var options = ScanOptions(
         strings: {
-          "cancel": _cancelController.text,
           "flash_on": _flashOnController.text,
           "flash_off": _flashOffController.text,
         },
@@ -496,12 +509,13 @@ class mycard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4.0)),
                   child: Stack(
                     overflow: Overflow.visible,
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment.center,
                     children: [
                       Container(
+                        color: Colors.transparent,
                         height: 200,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
+                          padding: const EdgeInsets.fromLTRB(10, 200, 10, 10),
                           child: Column(
                             children: [
                               Text(
