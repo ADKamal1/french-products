@@ -61,12 +61,8 @@ class _MyAppState extends State<_MyApp> {
                                   29) &&
                               (int.parse(
                                       scanResult.rawContent.substring(1, 3)) <
-                                  40) ||
-                          ((int.parse(scanResult.rawContent.substring(3, 6))) >
-                                  299) &&
-                              ((int.parse(
-                                      scanResult.rawContent.substring(3, 6))) <=
-                                  380))
+                                  38)
+                          )
                       ? Dialog(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0)),
